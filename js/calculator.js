@@ -1,5 +1,6 @@
 let Currents = 0;
 let FlagNewNum = false;
+let FlagFrac = 0;
 let PendingOp = "";
 
 function NumPressed(Num) {
@@ -16,23 +17,66 @@ function NumPressed(Num) {
 
 function Operation(Op) {
     let Readout = $('#display').val();
+    let Readout2 = Readout;
+    if (Readout >= 0.1 && Readout < 1) {
+        Readout *= 10;
+        FlagFrac++;
+    }
     if (FlagNewNum && PendingOp != "=") {
         $('#display').val(Currents);
     } else {
         FlagNewNum = true;
-        if ('+' == PendingOp)
+        if ('+' == PendingOp) {
+            if (FlagFrac == 1 && Readout2 >= 0.1 && Readout2 < 1)
+                Readout = Readout / 10;
+            else if (FlagFrac == 1)
+                Currents = Currents / 10;
             Currents += parseFloat(Readout);
-        else if ('-' == PendingOp)
+            if (FlagFrac == 2)
+                Currents = Currents / 10;
+            $('#display').val(Currents);
+            FlagFrac = 0;
+        } else if ('-' == PendingOp) {
+            if (FlagFrac == 1 && Readout2 >= 0.1 && Readout2 < 1)
+                Readout = Readout / 10;
+            else if (FlagFrac == 1)
+                Currents = Currents / 10;
             Currents -= parseFloat(Readout);
-        else if ('/' == PendingOp)
+            if (FlagFrac == 2)
+                Currents = Currents / 10;
+            $('#display').val(Currents);
+            FlagFrac = 0;
+        } else if ('/' == PendingOp) {
             Currents /= parseFloat(Readout);
-        else if ('*' == PendingOp)
+            if (FlagFrac == 2)
+                Currents = Currents / 100;
+            else if (FlagFrac = 1)
+                Currents = Currents / 10;
+            $('#display').val(Currents);
+            FlagFrac = 0;
+        } else if ('*' == PendingOp) {
             Currents *= parseFloat(Readout);
-        else if ('^' == PendingOp)
+            if (FlagFrac == 2)
+                Currents = Currents / 100;
+            else if (FlagFrac = 1)
+                Currents = Currents / 10;
+            $('#display').val(Currents);
+            FlagFrac = 0;
+        } else if ('^' == PendingOp) {
+            if (FlagFrac == 1 && Readout2 >= 0.1 && Readout2 < 1)
+                Readout = Readout / 10;
+            else if (FlagFrac == 1)
+                Currents = Currents / 10;
+            if (FlagFrac == 2) {
+                Currents = Currents / 10;
+                Readout = Readout / 10;
+            }
             Currents **= parseFloat(Readout);
-        else
+            $('#display').val(Currents);
+            FlagFrac = 0;
+        } else {
             Currents = parseFloat(Readout);
-        $('#display').val(Currents);
+        }
         PendingOp = Op;
     }
 }

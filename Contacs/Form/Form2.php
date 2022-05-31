@@ -12,6 +12,8 @@ if (!isset($_SESSION['logged_user'])) {
   <meta charset="utf-8">
   <link rel="stylesheet" href="../../css/style.css">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="../../js/jquery-3.6.0.min.js"></script>
+  <script src="../../js/scriptl9.js"></script>
 </head>
 
 <body>
@@ -81,33 +83,35 @@ if (!isset($_SESSION['logged_user'])) {
       <div class="form__button">
         <button class="form__button-text">Зарегистрироваться</button>
       </div>
-    </form>
-    <form class="form">
+   
+  
       <div class="form__rows">
         <p class="form__row">
           <label for="first_name" class="form__label">Текстовое поле</label>
-          <input type="text" name="text_field" id="text_field" class="form__input">
+          <input type="text" name="text" id="text" class="form__input">
         </p>
         <p for="post" class="form__row">
           <label class="form__label">Выпадающий список</label>
-          <input type="text" list="list" name="vyp_list" id="vyp_list" class="form__input">
-          <datalist id="list">
-            <option value="Студент">
-            <option value="Преподаватель">
-          </datalist>
+          <select name="option" id="option" class="form__input">
+            <option value="Свойство 1">Свойство 1</option>
+            <option value="Свойство 2">Свойство 2</option>
+            <option value="Свойство 3">Свойство 3</option>
+            <option value="Свойство 4">Свойство 4</option>
+            <option disable selected style='display: none'></option>
+          </select>
         </p>
       </div>
       <div class="form__button">
-        <button class="form__button-text" type="button" name="" onclick="">Добавить значения</button>
+        <input  type="button" id="Add" value='Добавить значения'>
       </div>
       <div class="form__button">
-        <button class="form__button-text" type="button" name="" onclick="">Перемешать</button>
+        <button class="form__button-text" type="button" name="Mix" id="Mix" >Перемешать</button>
       </div>
       <div class="form__button">
-        <button class="form__button-text" type="button" name="" onclick="">Вывести свойство</button>
+        <button class="form__button-text" type="button" name="Pr" id="Pr" >Вывести свойство</button>
       </div>
       <div class="form__button">
-        <button class="form__button-text" type="button" name="" onclick="">Вывести массив</button>
+        <button class="form__button-text" type="button" name="Wr" id="Wr">Вывести массив</button>
       </div>
     </form>
   </main>

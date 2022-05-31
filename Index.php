@@ -2,6 +2,23 @@
 session_start();
 $_SESSION['authlink'] = 1;
 
+require_once 'auth/db.php';
+
+$sql = "SELECT * FROM users";
+$result = mysqli_query($link, $sql);
+$categories = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+foreach ($categories as $category)
+    {
+        if ($category['login'] == $_SESSION['logged_user']) 
+        {
+			if ($category['ChPass'] == 1)
+    		{	
+        		header("Location: http://localhost/auth/changepass.php");
+    		}	
+		}
+	}
+
 ?>
 <!doctype html>
 <html lang="ru">

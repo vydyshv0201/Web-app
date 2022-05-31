@@ -4,20 +4,23 @@ session_start();
 $data = $_POST;
 
 if (isset($data['do_login'])) {
-    $fd = fopen("database/database.txt", 'a+') or die("не удалось открыть файл");
+    require_once 'db.php';
     $errors = array();
     $flag = false;
-    while(!feof($fd))
+
+    $sql = "SELECT * FROM users";
+    $result = mysqli_query($link, $sql);
+    $categories = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+    foreach ($categories as $category)
     {
-        $str = fgets($fd);
-        if ($str == $data['login']."\n") 
+        if ($category['login'] == $data['login']) 
         {
-            $str = fgets($fd);
-            if (password_verify($data['password'], trim($str, "\n"))) 
+            if (password_verify($data['password'], $category['password'])) 
             {
                 $flag=true;
                 $_SESSION['logged_user'] = $data['login'];
-
+    
                 if ($_SESSION['authlink'] == 1){
                     header("Location: http://localhost/");
                 }
@@ -33,14 +36,12 @@ if (isset($data['do_login'])) {
                 else {
                     header("Location: http://localhost/");
                 }
-
-
             } else
             {
                 $errors[] = 'Введен неверный пароль!';
             }
         } 
-    }
+    } 
 
     if ($flag == false)
     {
@@ -50,7 +51,8 @@ if (isset($data['do_login'])) {
     if (!empty($errors)) {
         echo '<div style="color: red; text-align: center;">' . array_shift($errors) . '</div><hr>';
     } 
-    fclose($fd);
+    mysqli_free_result($result);
+    mysqli_close($link);
 }
 
 ?>
@@ -58,7 +60,7 @@ if (isset($data['do_login'])) {
 <html lang="ru">
 
 <head>
-    <title>Заполнить форму</title>
+    <title>Вход</title>
     <meta charset="utf-8">
     <link rel="stylesheet" href="../css/style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -78,6 +80,10 @@ if (isset($data['do_login'])) {
             <p class="form__row">
                 <label label for="password" class="form__label">Пароль</label>
                 <input type="password" name="password" placeholder="Enter password" id="password" value="<?php echo $data['password']; ?>" class="form__input">
+            </p>
+            <p class="form__row">
+                <label class="form__label"></label>
+                <a href="recovery.php" class="form-body__link">Восстановить пароль</a>
             </p>
             <p class="form__row">
                 <label class="form__label"></label>

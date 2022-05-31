@@ -1,10 +1,10 @@
 <?php
 
-session_start();
 $data = $_POST;
 
-if (isset($data['do_signup'])) {
-  $fd = fopen("database/database.txt", 'a+') or die("не удалось открыть файл");
+if (isset($data['do_signup'])) 
+{
+  require_once 'db.php';
   $errors = array();
 
   if ($data['login'] == '') {
@@ -23,30 +23,32 @@ if (isset($data['do_signup'])) {
     $errors[] = 'Повторный пароль неверный!';
   }
 
-  while(!feof($fd))
+  $sql = "SELECT * FROM users";
+  $result = mysqli_query($link, $sql);
+  $categories = mysqli_fetch_all($result, MYSQLI_ASSOC);
+  foreach ($categories as $category)
   {
-      $str = fgets($fd);
-      if ($str == $data['login']."\n") {
-        $errors[] = 'Введенный логин уже существует!';
-      }
-      if ($str == $data['email']."\n") {
-        $errors[] = 'Введенный email уже существует!';
-      }
-  }
+    if ($category['login'] == $data['login']) {
+      $errors[] = 'Введенный логин уже существует!';
+    }
+    if ($category['email'] == $data['email']) {
+      $errors[] = 'Введенный email уже существует!';
+    }
+  }    
 
   if (empty($errors)) {
-    $str = $data['login'] . "\n";
-    fwrite($fd, $str);
-    $str = password_hash($data['password'], PASSWORD_DEFAULT)."\n";
-    fwrite($fd, $str);
-    $str = $data['email'] . "\n\n";
-    fwrite($fd, $str);
+
+    $sql = "INSERT INTO users (login, password, email, ChPass) VALUES ('".$data['login']."', '".password_hash($data['password'], PASSWORD_DEFAULT)."', '".$data['email']."', 0)";
+    $result = mysqli_query($link, $sql);
+    $categories = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
     echo '<div style="color: green; text-align: center;">Вы зарегестрированы!</div><hr>';
     header("Location: http://localhost/auth/login.php");
   } else {
     echo '<div style="color: red; text-align: center;">' . array_shift($errors) . '</div><hr>';
   }
-  fclose($fd);
+  mysqli_free_result($result);
+  mysqli_close($link);
 }
 
 ?>
@@ -55,7 +57,7 @@ if (isset($data['do_signup'])) {
 <html lang="ru">
 
 <head>
-  <title>Заполнить форму</title>
+  <title>Регистрация</title>
   <meta charset="utf-8">
   <link rel="stylesheet" href="../css/style.css">
   <meta name="viewport" content="width=device-width, initial-scale=1">

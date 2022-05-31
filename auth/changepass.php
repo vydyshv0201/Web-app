@@ -1,8 +1,6 @@
 <?php
 
-
 session_start();
-
 $data = $_POST;
 
 function getToken() {
@@ -38,34 +36,30 @@ if (isset($data['do_change'])) {
 
     if (empty($errors)) {
         $arr = array();
-        $fd = fopen("database/database.txt", 'a+') or die("не удалось открыть файл");
-        while(!feof($fd))
-        {
-            $arr[] = fgets($fd);
-        } 
-        fclose($fd);
-        for ($i=0; $i<count($arr); $i++)
-        {
-            if ($arr[$i]==$_SESSION['logged_user']."\n")
-            {
-                $arr[$i+1]= password_hash($data['password'], PASSWORD_DEFAULT)."\n";
-            }
-            
-        }
-        $fd = fopen("database/database.txt", 'w') or die("не удалось открыть файл");
+        require_once 'db.php';
+        $sql = "SELECT * FROM users";
+        $result = mysqli_query($link, $sql);
+        $categories = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
-        for ($i=0; $i<count($arr); $i++){
-            fwrite($fd, $arr[$i]);
-        }
-        fclose($fd);
+        foreach ($categories as $category)
+        {
+            if ($category['login'] == $_SESSION['logged_user']) {
+                $sql = "UPDATE users SET password='".password_hash($data['password'], PASSWORD_DEFAULT)."' WHERE login='".$category['login']."'";
+                $result = mysqli_query($link, $sql);
+                $sql = "UPDATE users SET ChPass=0 WHERE email='".$category['email']."'";
+                $result = mysqli_query($link, $sql);
+            }
+        }  
+
+        mysqli_free_result($result);
+        mysqli_close($link);
         echo '<div style="color: red; text-align: center;">Пароль успешно изменен</div><hr>';
         header("Location: http://localhost/auth/logout.php");
 
-      } else {
+    } else {
         echo '<div style="color: red; text-align: center;">' .array_shift($errors). '</div><hr>';
-      }
-      
-  }
+    }
+}
 
 ?>
 
@@ -74,7 +68,7 @@ if (isset($data['do_change'])) {
 
 
 <head>
-    <title>Заполнить форму</title>
+    <title>Поменять пароль</title>
     <meta charset="utf-8">
     <link rel="stylesheet" href="../css/style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">

@@ -1,8 +1,54 @@
+* {margin: 0;}
 
-footer {
-    clear: both; 
-    border-top: 1px solid #ccc; padding: 10px;    }
-aside { width: 320px; float: right; height: 300px; background-color:  red;
- }
-header {text-align: center;}
-nav {text-align: center; width: 1500px;}
+body {background-color: #ede1a6   }
+
+a {text-decoration: none;
+    color:rgb(0, 0, 0);}
+
+nav > button {
+    background-color: rgb(192, 180, 112); 
+    border: none;
+    
+    padding: 8px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    border-radius: 2px;
+}
+
+nav > button:hover {background-color: rgb(255, 240, 179);}
+
+nav > button:hover ~ button {background-color: #ede1a6}
+
+.hidden  {display: none;}
+
+li > a:hover + .hidden {display: block;}
+
+main {border-top: 2px solid rgb(65, 65, 65); padding: 10px;}
+
+footer { 
+    clear: both; padding: 10px;
+    text-align: center;
+    font-size: 18pt; 
+    border-top: 2px solid rgb(65, 65, 65); padding: 10px;
+    position: fixed;
+    width: 100%; height: 50px; top: 92%; left: 0px; background-color:rgb(192, 180, 112);  
+}
+
+aside { width: 320px; float: right; height: 250px; background-color:  rgb(192, 180, 112); margin: 10px; }
+header {text-align: center;  background-color:  rgb(192, 180, 112); padding: 50px; }
+
+nav {  text-align: center; margin: 10px;}
+
+p::selection {background-color:  rgb(192, 180, 112);}
+
+p, ul, h2, li {margin: 10px;}
+
+section {padding-bottom: 5%}
+
+.photo IMG{ position: relative; }
+.one { top: 50px; left: 55px; z-index: 5; }
+.two { left: -120px; top: 25px; z-index: 2;}
+.three { left: -295px; z-index: 1; }
+.photo IMG:hover { z-index: 10; } 

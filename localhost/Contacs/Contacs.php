@@ -1,3 +1,10 @@
+<?php
+session_start();
+if (!isset($_SESSION['logged_user'])) {
+  $_SESSION['authlink'] = 3;
+  header("Location: http://localhost/auth/login.php");
+}
+?>
 <!doctype html>
 <html lang="ru">
 
@@ -13,11 +20,15 @@
     <h1 class="header__title">Контакты</h1>
   </header>
   <nav class="menu">
-
-    <button class="menu__button"><a href="../index.php" class="menu__link">Главная страница </a></button>
-    <button class="menu__button"><a href="../News/News.php" class="menu__link">Новости</a></button>
-    <button class="menu__button"><a href="Form/Form.php" class="menu__link">Форма</a> </button>
-
+    <div class="menu__nav">
+      <button class="menu__button"><a href="../index.php" class="menu__link">Главная страница </a></button>
+      <button class="menu__button"><a href="../News/News.php" class="menu__link">Новости</a></button>
+      <button class="menu__button"><a href="Form/Form.php" class="menu__link">Форма</a> </button>
+    </div>
+    <div class="menu__auth">
+      <a href="../../auth/changepass.php" class="">Поменять пароль /</a>
+      <a href="../../auth/logout.php" class=""> Выйти</a>
+    </div>
   </nav>
   <main class="main">
     <section class="main__section">

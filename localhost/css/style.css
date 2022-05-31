@@ -19,8 +19,18 @@ body {
 }
 
 .menu {
-    text-align: center;
     grid-area: menu;
+}
+
+.menu__nav {
+    text-align: center;
+}
+
+.menu__auth {
+    text-align: right;
+    margin-top: -20px;
+    margin-right: 2%;
+    margin-right: 2%;
 }
 
 .menu__link {
@@ -116,6 +126,17 @@ body {
 .form_button-text_link {
     text-decoration: none;
     color: rgb(0, 0, 0);
+}
+
+.form-body {
+    grid-template-columns: 1fr;
+    grid-template-rows: 140px auto;
+}
+
+.form-body__link {
+    display: table-cell;
+    margin-bottom: 10px;
+    text-align: right;
 }
 
 

@@ -1,3 +1,9 @@
+<?php
+session_start();
+if (!isset($_SESSION['logged_user'])) {
+  header("Location: http://localhost/auth/login.php");
+}
+?>
 <!doctype html>
 <html lang="ru">
 
@@ -13,11 +19,15 @@
     <h1 class="header__title">Заполнить форму</h1>
   </header>
   <nav class="menu">
-
-    <button class="menu__button"><a href="../../index.php" class="menu__link">Главная страница </a></button>
-    <button class="menu__button"><a href="../../News/News.php" class="menu__link">Новости</a></button>
-    <button class="menu__button"><a href="../Contacs.php" class="menu__link">Контакты</a></button>
-
+    <div class="menu__nav">
+      <button class="menu__button"><a href="../../index.php" class="menu__link">Главная страница </a></button>
+      <button class="menu__button"><a href="../../News/News.php" class="menu__link">Новости</a></button>
+      <button class="menu__button"><a href="../Contacs.php" class="menu__link">Контакты</a></button>
+    </div>
+    <div class="menu__auth">
+      <a href="../../auth/changepass.php" class="">Поменять пароль /</a>
+      <a href="../../auth/logout.php" class=""> Выйти</a>
+    </div>
   </nav>
   <main class="main">
     <form action="data.php" method="post" enctype="multipart/form-data" class="form">

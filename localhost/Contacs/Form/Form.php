@@ -1,3 +1,9 @@
+<?php
+session_start();
+if (!isset($_SESSION['logged_user'])) {
+  header("Location: http://localhost/auth/login.php");
+}
+?>
 <!doctype html>
 <html lang="ru">
 
@@ -13,39 +19,54 @@
     <h1 class="header__title">Заполнить форму</h1>
   </header>
   <nav class="menu">
-
-    <button class="menu__button"><a href="../../index.php" class="menu__link">Главная страница </a></button>
-    <button class="menu__button"><a href="../../News/News.php" class="menu__link">Новости</a></button>
-    <button class="menu__button"><a href="../Contacs.php" class="menu__link">Контакты</a></button>
-
+    <div class="menu__nav">
+      <button class="menu__button"><a href="../../index.php" class="menu__link">Главная страница </a></button>
+      <button class="menu__button"><a href="../../News/News.php" class="menu__link">Новости</a></button>
+      <button class="menu__button"><a href="../Contacs.php" class="menu__link">Контакты</a></button>
+    </div>
+    <div class="menu__auth">
+      <a href="../../auth/changepass.php" class="">Поменять пароль /</a>
+      <a href="../../auth/logout.php" class=""> Выйти</a>
+    </div>
   </nav>
   <main class="main">
-    <form action="#" method="get" class="form">
 
+    <?php
+
+    if (isset($_GET["do_signup1"])) {
+      echo '<div style= "text-align: center;">' .addcslashes(
+        $_GET['first_name']
+        , '<>')
+        . ', ваша форма отправлена.</div>';
+    }
+
+
+    ?>
+    <form action="#" method="get" class="form" enctype="multipart/form-data">
       <div class="form__rows">
         <p class="form__row">
           <label for="first_name" class="form__label">Имя</label>
-          <input type="text" placeholder="Enter name" name="first_name" id="first_name" value=" <?php echo htmlspecialchars($_GET['first_name']); ?>" class="form__input">
+          <input type="text" placeholder="Enter name" name="first_name" value="" id="first_name" value="<?php echo htmlspecialchars($_GET['first_name']); ?>" class="form__input">
         </p>
         <p class="form__row">
           <label for="surname" class="form__label">Фамилия</label>
-          <input type="text" placeholder="Enter " name="surname" id="surname" value="<?php echo htmlspecialchars($_GET['surname']); ?>" class="form__input">
+          <input type="text" placeholder="Enter " name="surname" id="surname" class="form__input">
         </p>
         <p class="form__row">
           <label for="date" class="form__label">Дата</label>
-          <input type="date" name="date" id="date" value="<?php echo htmlspecialchars($_GET['date']); ?>" class="form__input">
+          <input type="date" name="date" id="date" class="form__input">
         </p>
         <p class="form__row">
           <label for="email" class="form__label">Email</label>
-          <input type="email" name="email" id="email" value="<?php echo htmlspecialchars($_GET['email']); ?>" class="form__input">
+          <input type="email" name="email" id="email" class="form__input">
         </p>
         <p class="form__row">
           <label for="age" class="form__label">Возраст</label>
-          <input type="number" name="age" id="age" value="<?php echo htmlspecialchars($_GET['age']); ?>" min="0" max="100" step="4" class="form__input">
+          <input type="number" name="age" id="age" min="0" max="100" step="4" class="form__input">
         </p>
         <p for="post" class="form__row">
           <label class="form__label">Должность</label>
-          <input type="text" list="list" name="post" id="post" value="<?php echo htmlspecialchars($_GET['post']); ?>" class="form__input">
+          <input type="text" list="list" name="post" id="post" class="form__input">
           <datalist id="list">
             <option value="Студент">
             <option value="Преподаватель">
@@ -53,15 +74,15 @@
         </p>
         <p for="number" class="form__row">
           <label class="form__label">Номер телефона</label>
-          <input type="tel" name="number" id="number" value="<?php echo htmlspecialchars($_GET['number']); ?>" class="form__input">
+          <input type="tel" name="number" id="number" class="form__input">
         </p>
         <p for="password" class="form__row">
           <label class="form__label">Пароль</label>
-          <input type="password" name="password" id="password" value="<?php echo htmlspecialchars($_GET['password']); ?>" class="form__input">
+          <input type="password" name="password" id="password" class="form__input">
         </p>
       </div>
       <div class="form__button">
-        <button class="form__button-text">Зарегистрироваться</button>
+        <button class="form__button-text" type="submit" name="do_signup1">Зарегистрироваться</button>
       </div>
       <div class="form__button">
         <button class="form__button-text"><a href="Form2.php" class="form_button-text_link">Форма 2</a></button>

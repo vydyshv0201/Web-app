@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <title>Заполнить форму</title>
+    <meta charset="utf-8">
+      <link rel="stylesheet" href="../../css/style.css">
+  </head>
+  <body>
+    <header>
+      <h1>Заполнить форму</h1>
+      
+    </header>
+    <nav>
+      <ul>    
+          <button><a href="../../index.html">Главная страница  </a></button>
+          <button><a href="../../News/News.html">Новости</a></button>       
+          <button><a href="../Contacs.html">Контакты</a></button>
+        </ul>
+      </nav>
+      <main>
+          <aside>
+          <ul>
+          <li>Пункт №1</li><li>Пункт №2</li><li>Пункт №3</li>
+          </ul>
+          </aside>
+        <form action="/signup" method="POST">
+          <p>
+            <label for="first_name">Имя</label>
+            <input type="text" placeholder= "Enter name" name="first_name" id="first_name">
+          </p>
+          <p>
+            <label>Фамилия</label>
+            <input type="text" placeholder= "Enter " name="surname" >
+          </p>
+          <p>
+            <label>Дата</label>
+            <input type="date" value="2020-07-22">  
+          </p>
+          <p>
+            <label>Email</label>
+            <input type="email" name="email">
+          </p>
+          <p>
+            <label>Возраст</label>
+            <input type="number" min="0" max="100" step="4">
+          </p>
+          <p>
+            <label>Должность</label>
+            <input type="text" list="list">
+            <datalist id="list">
+            <option value="Студент">
+            <option value="Преподаватель">
+            </datalist>
+          </p>
+          <p>
+            <label>Количество</label>
+            <input type="range" min="0" max="10" step="2">
+          </p>
+          <p>
+            <label>Номер телефона</label>
+            <input type="tel">
+          </p>        
+          <p>
+            <label>Пароль</label>
+            <input type="password">
+          </p>      
+          <p>
+            <button>Зарегистрироваться</button>
+          </p>
+        </form>
+      </main> 
+      <footer> Это footer</footer>
+  </body>
+
+</html>
+

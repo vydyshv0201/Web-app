@@ -1,7 +1,7 @@
 <?php
-	session_start();
-	$_SESSION['authlink'] = 1;
-	
+session_start();
+$_SESSION['authlink'] = 1;
+
 ?>
 <!doctype html>
 <html lang="ru">
@@ -20,18 +20,20 @@
 
 	<nav class="menu">
 		<div class="menu__nav">
-		<button class="menu__button"><a href="News/News.php" class="menu__link">Новости</a></button>
-		<button class="menu__button"><a href="Contacs/Contacs.php" class="menu__link">Контакты</a></button>
+			<form>
+				<button class="menu__button" formaction="http://localhost/News/News.php">Новости</button>
+				<button class="menu__button" formaction="http://localhost/Contacs/Contacs.php">Контакты</button>
+				<button class="menu__button" formaction="http://localhost/calculator/calculator.php">Калькулятор</button>
+			</form>
 		</div>
 		<div class="menu__auth">
-		<?php if (isset($_SESSION['logged_user']))	{
-			echo '<a href="auth/changepass.php" class="">Поменять пароль /</a>';
-			echo '<a href="auth/logout.php" class=""> Выйти</a>';
-		} else {
-			echo '<a href="auth/login.php" class=""> Войти</a>';
-			
-		}
-		?>
+			<?php if (isset($_SESSION['logged_user'])) {
+				echo '<a href="auth/changepass.php" class="">Поменять пароль /</a>';
+				echo '<a href="auth/logout.php" class=""> Выйти</a>';
+			} else {
+				echo '<a href="auth/login.php" class=""> Войти</a>';
+			}
+			?>
 		</div>
 	</nav>
 	<main class="main">

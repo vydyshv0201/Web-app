@@ -20,13 +20,17 @@ if (!isset($_SESSION['logged_user'])) {
 	</header>
 	<nav class="menu">
 		<div class="menu__nav">
-			<button class="menu__button"><a href="../../index.php" class="menu__link">Главная страница </a></button>
-			<button class="menu__button"><a href="../News.php" class="menu__link">Новости</a> </button>
+			<form>
+				<button class="menu__button" formaction="http://localhost/index.php">Главная страница</button>
+				<button class="menu__button" formaction="http://localhost/News/News.php">Новости</button>
+				<button class="menu__button" formaction="http://localhost/Contacs/Contacs.php">Контакты</button>
+				<button class="menu__button" formaction="http://localhost/calculator/calculator.php">Калькулятор</button>
+			</form>
 		</div>
 		<div class="menu__auth">
-      <a href="../../auth/changepass.php" class="">Поменять пароль /</a>
-      <a href="../../auth/logout.php" class=""> Выйти</a>
-    </div>
+			<a href="../../auth/changepass.php" class="">Поменять пароль /</a>
+			<a href="../../auth/logout.php" class=""> Выйти</a>
+		</div>
 	</nav>
 	<main class="main">
 		<div class="main__sections-columns">

@@ -27,10 +27,10 @@ if (!isset($_SESSION['logged_user'])){
 if (isset($data['do_change'])) {
     $errors = array();
 
-    //if(!checkToken($token)){
-    //    $errors[] = 'ахаха, не получилось :)';
-    //    unset($_SESSION['token']);
-    //}
+    if(!checkToken($token)){
+        $errors[] = 'ахаха, не получилось (csrf) :)';
+        unset($_SESSION['token']);
+    }
 
     if ($data['password_2'] != $data['password']) {
       $errors[] = 'Повторный пароль неверный!';
@@ -68,7 +68,7 @@ if (isset($data['do_change'])) {
   }
 
 ?>
-<script>alert(document.cookie)</script>
+
 <!doctype html>
 <html lang="ru">
 

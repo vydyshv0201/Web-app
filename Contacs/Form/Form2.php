@@ -20,9 +20,13 @@ if (!isset($_SESSION['logged_user'])) {
   </header>
   <nav class="menu">
     <div class="menu__nav">
-      <button class="menu__button"><a href="../../index.php" class="menu__link">Главная страница </a></button>
-      <button class="menu__button"><a href="../../News/News.php" class="menu__link">Новости</a></button>
-      <button class="menu__button"><a href="../Contacs.php" class="menu__link">Контакты</a></button>
+      <form>
+        <button class="menu__button" formaction="http://localhost/index.php">Главная страница</button>
+        <button class="menu__button" formaction="http://localhost/News/News.php">Новости</button>
+        <button class="menu__button" formaction="http://localhost/Contacs/Contacs.php">Контакты</button>
+        <button class="menu__button" formaction="http://localhost/calculator/calculator.php">Калькулятор</button>
+        <button class="menu__button" formaction="http://localhost/Contacs/Form/Form.php">Форма 1</button>
+      </form>
     </div>
     <div class="menu__auth">
       <a href="../../auth/changepass.php" class="">Поменять пароль /</a>
@@ -77,8 +81,33 @@ if (!isset($_SESSION['logged_user'])) {
       <div class="form__button">
         <button class="form__button-text">Зарегистрироваться</button>
       </div>
+    </form>
+    <form class="form">
+      <div class="form__rows">
+        <p class="form__row">
+          <label for="first_name" class="form__label">Текстовое поле</label>
+          <input type="text" name="text_field" id="text_field" class="form__input">
+        </p>
+        <p for="post" class="form__row">
+          <label class="form__label">Выпадающий список</label>
+          <input type="text" list="list" name="vyp_list" id="vyp_list" class="form__input">
+          <datalist id="list">
+            <option value="Студент">
+            <option value="Преподаватель">
+          </datalist>
+        </p>
+      </div>
       <div class="form__button">
-        <button class="form__button-text"><a href="Form.php" class="form_button-text_link">Форма 1</a></button>
+        <button class="form__button-text" type="button" name="" onclick="">Добавить значения</button>
+      </div>
+      <div class="form__button">
+        <button class="form__button-text" type="button" name="" onclick="">Перемешать</button>
+      </div>
+      <div class="form__button">
+        <button class="form__button-text" type="button" name="" onclick="">Вывести свойство</button>
+      </div>
+      <div class="form__button">
+        <button class="form__button-text" type="button" name="" onclick="">Вывести массив</button>
       </div>
     </form>
   </main>

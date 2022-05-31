@@ -27,6 +27,9 @@ if (isset($data['do_login'])) {
                 if ($_SESSION['authlink'] == 3){
                     header("Location: http://localhost/Contacs/Contacs.php");
                 }
+                if ($_SESSION['authlink'] == 4){
+                    header("Location: http://localhost/calculator/calculator.php");
+                }
                 else {
                     header("Location: http://localhost/");
                 }
